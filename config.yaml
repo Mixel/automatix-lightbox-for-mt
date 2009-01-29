@@ -1,0 +1,13 @@
+name: AutomatixLightBox For MT
+id: AutomatixLightBox
+key: AutomatixLightBox
+author_link: http://mixelandia.com/
+author_name: Mixel Adm
+description: Adds automatic LightBox support into your blogs
+version: 1.0
+plugin_link: http://mixelandia.com/plugins/AutomaticxLightBox.php
+
+callbacks:
+  build_page: $AutomatixLightBox::AutomatixLightBox::Plugin::buildc
+  
+
