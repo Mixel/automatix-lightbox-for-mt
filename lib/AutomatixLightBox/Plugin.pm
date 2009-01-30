@@ -1,9 +1,27 @@
+#     This program is free software: you can redistribute it and/or modify
+#     it under the terms of the GNU General Public License as published by
+#     the Free Software Foundation, either version 3 of the License, or
+#     any later version.
+# 
+#     This program is distributed in the hope that it will be useful,
+#     but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#     GNU General Public License for more details.
+# 
+#     You should have received a copy of the GNU General Public License
+#     along with this program.  If not, see <http://www.gnu.org/licenses/>
+
+####
+#### AutomatixLightBox for MT and MTOS 
+#### Copyright 2008 Mixel Adm  
+#### http://mixelandia.com
+
+
 package AutomatixLightBox::Plugin;
 
 use strict;
 
 our $cache; #
-
 
 sub buildc {
  my ($cb, %args) = @_;
@@ -15,12 +33,11 @@ sub buildc {
    if(length($x) > 5) # we skip the subpatterns 
    {
      my $y = $x;
-     $added = 1; #ew have need the scripts
+     $added = 1; #we need the scripts
      if ($y !~ m/rel\s*=\s*['"]/i) #skip it if rel is already set. -- for galleries
      {
        $y =~ s/<a/<a rel="lightbox"/i;
-       $$ref =~ s/\Q$x\E/$y/mig;
-       
+       $$ref =~ s/\Q$x\E/$y/mig;     
       }
     } 
  }
@@ -59,18 +76,9 @@ sub crea_plantilla {
   $t->save() or die $tmpl->errstr;
 }
 
-
-
 sub plugin {
-  return MT->component("LightBox");
+  return MT->component("AutomatixLightBox");
 }
-
-#        MT->log({            
-#          message => 'debug',
-#          class => 'system',
-#          level => MT::Log::INFO(), 
-#        });
-
 
 
 1;
