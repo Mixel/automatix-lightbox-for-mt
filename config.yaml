@@ -7,7 +7,5 @@ description: Adds automatic LightBox support into your blogs
 version: 1.0
 plugin_link: http://mixelandia.com/plugins/plugin-automatix-lightbox-for-mt-y-mtos.php
 
-callbacks:
-  build_page: $AutomatixLightBox::AutomatixLightBox::Plugin::buildc
-  
-
+callbacks:  MT::App::CMS::template_param.edit_entry: $AutomatixLightBox::AutomatixLightBox::Entry::xfrm_edit  MT::App::CMS::cms_pre_save.page: $AutomatixLightBox::AutomatixLightBox::Entry::pre_save  MT::App::CMS::cms_pre_save.entry: $AutomatixLightBox::AutomatixLightBox::Entry::pre_save  build_page: $AutomatixLightBox::AutomatixLightBox::Plugin::buildc
+object_types:  entry:    as_gallery: integer

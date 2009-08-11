@@ -25,7 +25,7 @@ our $cache; #
 
 sub buildc {
  my ($cb, %args) = @_;
- my $ref = $args{Content};
+ my $ref = $args{Content};use Data::Dumper;  MT->log({ message => Dumper($args{Entry})  }); my $entry = $args{Entry}; my $lightbox = '<a rel="lightbox"'; if (defined $args{Entry} and $args{Entry}->as_gallery == 1) {   $lightbox = '<a rel="lightbox[' .$args{Entry}->id. ']"'; } 
  my $content = $$ref;
  my $x;
  my $added = 0;
@@ -36,7 +36,7 @@ sub buildc {
      $added = 1; #we need the scripts
      if ($y !~ m/rel\s*=\s*['"]/i) #skip it if rel is already set. -- for galleries
      {
-       $y =~ s/<a/<a rel="lightbox"/i;
+       $y =~ s/<a/$lightbox/i;
        $$ref =~ s/\Q$x\E/$y/mig;     
       }
     } 
@@ -51,7 +51,7 @@ sub buildc {
 sub lightboxscripts {
   my ($ctx, $args) = @_;
   return $cache unless(!$cache);
-  my $blog = $ctx->stash('blog'); 
+  my $blog = $ctx->stash('blog');   use Data::Dumper;  MT->log({ message => Dumper($ctx)  });
   my $out = '<script src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.2/prototype.js" type="text/javascript"></script>';
   $out .= '<script src="http://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.1/scriptaculous.js?load=effects,builder" type="text/javascript"></script>';
   $out .= '<script type="text/javascript" src="' . $blog->site_url .'/lightbox.js"></script>';
@@ -66,7 +66,7 @@ sub crea_plantilla {
   use MT::Template;
   my $t =MT::Template->load({ blog_id=>$blog->id , name => $nombre});
   return 0 if (MT::Template->load({ blog_id=>$blog->id , name => $nombre})); #we exit if it already exists
-  my $p = plugin();
+  my $p = plugin();  return unless defined $p;
   $t = $p->load_tmpl($tmpl);
   $t->name($nombre);
   $t->blog_id($blog->id);
@@ -77,7 +77,7 @@ sub crea_plantilla {
 }
 
 sub plugin {
-  return MT->component("AutomatixLightBox");
+  return MT->component("AutomatixLightBox") ;
 }
 
 
